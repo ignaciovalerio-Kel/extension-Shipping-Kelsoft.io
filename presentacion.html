@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Shipping Sidebar — Presentacion</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%;overflow:hidden}
+  body{
+    font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+    background:#0b1220;color:#e5e7eb;
+  }
+
+  /* ---------- slide container ---------- */
+  .deck{position:relative;width:100%;height:100%}
+  .slide{
+    position:absolute;inset:0;
+    display:flex;flex-direction:column;justify-content:center;align-items:center;
+    padding:48px 64px;text-align:center;
+    opacity:0;pointer-events:none;transition:opacity .35s ease;
+  }
+  .slide.active{opacity:1;pointer-events:auto}
+
+  /* ---------- typography ---------- */
+  .slide h1{font-size:clamp(28px,4vw,48px);font-weight:700;margin-bottom:16px;color:#fff}
+  .slide h2{font-size:clamp(22px,3vw,36px);font-weight:700;margin-bottom:24px;color:#fff}
+  .slide p,.slide li{font-size:clamp(15px,1.8vw,20px);line-height:1.6;color:#c7d2fe;max-width:760px}
+  .slide p+p{margin-top:14px}
+  .slide ul{text-align:left;list-style:none;padding:0;max-width:760px}
+  .slide li{padding:8px 0;border-bottom:1px solid rgba(255,255,255,.08)}
+  .slide li:last-child{border-bottom:none}
+  .slide .subtitle{font-size:clamp(14px,1.5vw,18px);color:#a5b4fc;margin-top:8px}
+
+  /* pill / badge */
+  .tag{
+    display:inline-block;padding:4px 12px;border-radius:8px;font-size:14px;font-weight:600;
+    background:rgba(31,111,229,.25);border:1px solid rgba(31,111,229,.5);color:#93c5fd;
+    margin:0 4px;vertical-align:middle;
+  }
+
+  /* key badge */
+  .key{
+    display:inline-block;width:28px;height:28px;line-height:28px;text-align:center;
+    border-radius:6px;font-size:14px;font-weight:700;
+    background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);color:#e5e7eb;
+    margin:0 3px;vertical-align:middle;
+  }
+
+  /* highlight box */
+  .box{
+    background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);
+    border-radius:14px;padding:24px 32px;margin-top:20px;max-width:760px;width:100%;text-align:left;
+  }
+  .box p{margin:6px 0}
+  .box .muted{color:#a5b4fc;font-size:14px;margin-top:10px}
+
+  .shot{
+    margin-top:18px;
+    width:min(980px, 100%);
+    border-radius:14px;
+    border:1px solid rgba(255,255,255,.14);
+    box-shadow:0 18px 60px rgba(0,0,0,.35);
+    display:block;
+  }
+  .shotCap{
+    margin-top:10px;
+    font-size:14px;
+    color:#a5b4fc;
+    max-width:760px;
+  }
+
+  /* ---------- nav ---------- */
+  .nav{
+    position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
+    display:flex;gap:12px;align-items:center;z-index:10;
+  }
+  .nav button{
+    background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);color:#e5e7eb;
+    padding:10px 18px;border-radius:10px;cursor:pointer;font-size:14px;
+    transition:background .15s;
+  }
+  .nav button:hover{background:rgba(255,255,255,.12)}
+  .nav button:disabled{opacity:.3;cursor:not-allowed}
+  .nav .counter{font-size:13px;color:#a5b4fc;min-width:56px;text-align:center}
+
+  /* dots */
+  .dots{
+    position:fixed;bottom:72px;left:50%;transform:translateX(-50%);
+    display:flex;gap:8px;z-index:10;
+  }
+  .dot{
+    width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.18);
+    transition:background .25s,transform .25s;cursor:pointer;border:none;
+  }
+  .dot.active{background:#1f6fe5;transform:scale(1.3)}
+
+  .split{
+  display:flex;
+  gap:32px;
+  align-items:center;
+  text-align:left;
+}
+
+.split .left{
+  flex:1;
+}
+
+.split .right{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+.shot{
+  width:100%;
+  max-width:520px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.14);
+  box-shadow:0 18px 60px rgba(0,0,0,.35);
+}
+
+.shotCap{
+  margin-top:10px;
+  font-size:14px;
+  color:#a5b4fc;
+}
+
+</style>
+</head>
+<body>
+
+<div class="deck" id="deck">
+
+  <!-- 0: Portada -->
+  <div class="slide active">
+    <h1>Shipping Sidebar</h1>
+    <p class="subtitle">Extensión de Chrome para relevamiento de envíos (benchmark)</p>
+    <p style="margin-top:32px;font-size:14px;color:#a5b4fc">Usa las flechas del teclado o los botones para navegar</p>
+  </div>
+
+  <!-- 1: Qué es -->
+  <div class="slide">
+    <h2>Qué es Shipping Sidebar</h2>
+    <p>Es una extensión de Chrome que permite gestionar tareas de relevamiento de envíos desde un panel lateral del navegador.</p>
+    <p>Cada tarea corresponde a un producto en un sitio de e-commerce. El objetivo es registrar datos como precio, vendedor, promesas de envío y costo de envío.</p>
+    <p>Los datos se almacenan automáticamente en una planilla de Google Sheets.</p>
+  </div>
+
+  <!-- 2: Qué automatiza -->
+  <div class="slide">
+    <h2>Qué automatiza</h2>
+    <ul>
+      <li><strong>Asignación y lectura de tareas</strong> desde Google Sheets por usuario (<span class="tag">User</span>).</li>
+      <li><strong>Apertura rápida de URL</strong> del competidor (<span class="tag">COMP_ITEM_URL</span>) desde el panel.</li>
+      <li><strong>Formulario guiado</strong> para capturar datos clave sin ir/volver a la planilla.</li>
+      <li><strong>Escritura automática</strong> en la fila correcta usando <span class="tag">task_id</span> como clave.</li>
+      <li><strong>Medición de tiempo</strong> por tarea: <span class="tag">Start_time</span>, <span class="tag">Finish_time</span> y <span class="tag">Time_per_task</span>.</li>
+      <li><strong>Cierre de tarea</strong> marcando <span class="tag">is_Completed</span> al enviar.</li>
+    </ul>
+  </div>
+
+  <!-- 3: Por qué es buena / necesaria -->
+  <div class="slide">
+    <h2>Por qué es buena / necesaria</h2>
+    <ul>
+      <li><strong>Reduce errores</strong>: menos copiar/pegar y menos columnas equivocadas.</li>
+      <li><strong>Estandariza</strong>: mismo flujo y mismos campos para todos.</li>
+      <li><strong>Acelera</strong>: baja el tiempo operativo por tarea y la fricción.</li>
+      <li><strong>Mejora trazabilidad</strong>: datos consistentes + tiempos reales por site/rival.</li>
+      <li><strong>Escalable</strong>: el backend escribe por <em>headers</em> (no depende del orden de columnas).</li>
+    </ul>
+  </div>
+<!-- 4: Iniciar sesión -->
+<div class="slide">
+  <h2>Paso 1 — Iniciar sesión</h2>
+
+  <div class="box split">
+    
+    <div class="left">
+      <p>Al abrir el panel lateral aparece un campo para ingresar el nombre de usuario.</p>
+      <p>Este nombre debe coincidir con el que figura en la planilla de tareas (<span class="tag">User</span>).</p>
+      <p>Después de escribirlo, hacer clic en <span class="tag">Cargar tareas</span> para traer las tareas asignadas.</p>
+      <p class="muted">El backend filtra: User = username y is_Completed ≠ TRUE.</p>
+    </div>
+
+    <div class="right">
+      <img class="shot" src="usuario.png" alt="Pantalla de ingreso y carga de tareas">
+      <p class="shotCap">Ingreso de usuario y carga de tareas asignadas.</p>
+    </div>
+
+  </div>
+</div>
+
+  <!-- 5: Navegar -->
+  <div class="slide">
+    <h2>Paso 2 — Navegar entre tareas</h2>
+    <div class="box">
+      <p>Se puede elegir una tarea desde el <strong>selector desplegable</strong> o avanzar y retroceder con <span class="tag">Tarea anterior</span> / <span class="tag">Siguiente tarea</span>.</p>
+      <p>Se muestra el <strong>número de tarea</strong> (<span class="tag">task_id</span>), el <strong>site</strong> y el <strong>CEP</strong> asignado para ese relevamiento.</p>
+      <p class="muted">El CEP viaja desde Sheets en el doGet para evitar cargarlo manualmente.</p>
+    </div>
+  </div>
+
+  <!-- 6: Abrir tarea -->
+  <div class="slide">
+    <h2>Paso 3 — Abrir la tarea</h2>
+    <div class="box">
+      <p>El botón <span class="tag">Abrir tarea</span> abre la URL del producto en la pestaña activa.</p>
+      <p>Al abrir, se registra <strong>Start_time</strong> (timestamp de inicio).</p>
+      <p>El cronómetro se reinicia cada vez que se navega a una tarea diferente.</p>
+    </div>
+  </div>
+
+  <!-- 7: Formulario -->
+  <div class="slide">
+  <h2>Paso 4 — Completar el formulario</h2>
+
+  <div class="box split">
+
+    <div class="left">
+      <ul>
+        <li><strong>Precio del producto</strong> — <span class="tag">roduct_price</span></li>
+        <li><strong>Enviado por</strong> — <span class="tag">Sent_By</span></li>
+        <li><strong>Vendido por</strong> — <span class="tag">Sold_By</span></li>
+        <li><strong>Importado</strong> — <span class="tag">Imported?</span></li>
+        <li><strong>Almacenado por el rival</strong> — <span class="tag">Stored_by_Rival?</span></li>
+        <li><strong>Promesa de envío</strong> — <span class="tag">shipping_promise</span></li>
+        <li><strong>Hora límite pay-before</strong> — <span class="tag">Deadline_to_paybefore</span></li>
+      </ul>
+    </div>
+
+    <div class="right">
+      <img class="shot" src="formulario.png" Pantalla del formulario de carga">
+      <p class="shotCap">Formulario operativo de carga y envío de tarea.</p>
+    </div>
+
+  </div>
+</div>
+
+  <!-- 9: Pegado rápido -->
+  <div class="slide">
+    <h2>Pegado rápido</h2>
+    <p>Permite capturar texto desde la página al formulario con atajos, sin ir a la planilla.</p>
+    <div class="box">
+      <p>1. Seleccionar el texto en la página</p>
+      <p>2. Presionar una tecla:</p>
+      <p style="text-align:center;margin:12px 0">
+        <span class="key">1</span> Precio del producto &nbsp;&nbsp;
+        <span class="key">2</span> Enviado por &nbsp;&nbsp;
+        <span class="key">3</span> Vendido por
+      </p>
+      <p>También se puede hacer clic en los botones numerados junto a cada campo como alternativa.</p>
+    </div>
+  </div>
+
+  <!-- 10: Enviar -->
+  <div class="slide">
+    <h2>Paso 5 — Enviar la tarea</h2>
+    <div class="box">
+      <p>Al hacer clic en <span class="tag">Enviar tarea</span> se envían los datos al backend junto con:</p>
+      <p>• <span class="tag">Start_time</span> (inicio)</p>
+      <p>• <span class="tag">Finish_time</span> (fin)</p>
+      <p>• <span class="tag">Time_per_task</span> (duración)</p>
+      <p>Al finalizar, se marca <span class="tag">is_Completed</span> y se avanza a la siguiente tarea pendiente.</p>
+    </div>
+  </div>
+
+  <!-- 11: Cómo funciona (arquitectura) -->
+  <div class="slide">
+    <h2>Cómo funciona (arquitectura)</h2>
+    <div class="box">
+      <p><strong>Google Sheets</strong> → fuente de verdad de tareas (cada fila = 1 tarea).</p>
+      <p><strong>Apps Script (backend)</strong> → expone endpoints HTTP (doGet/doPost) para leer/escribir por headers.</p>
+      <p><strong>Chrome Extension</strong> → UI lateral + navegación + envío de datos.</p>
+      <p class="muted">Clave: se escribe por nombre de columna (headers), no por índice fijo.</p>
+    </div>
+  </div>
+
+  <!-- 12: Stack -->
+  <div class="slide">
+    <h2>Stack / tecnologías</h2>
+    <ul>
+      <li><strong>Chrome Extension</strong> (HTML, CSS, JavaScript)</li>
+      <li><strong>Google Apps Script</strong> (Web App: doGet / doPost)</li>
+      <li><strong>Google Sheets</strong> (data store operativo)</li>
+      <li><strong>HTTP + JSON</strong> (Fetch/UrlFetchApp)</li>
+    </ul>
+  </div>
+
+  <!-- 13: Consideraciones -->
+  <div class="slide">
+    <h2>Consideraciones</h2>
+    <ul>
+      <li>El tiempo se mide por tarea con timestamps (inicio/fin) enviados desde la extensión.</li>
+      <li>El backend escribe en la fila correcta usando <span class="tag">task_id</span> como clave.</li>
+      <li>Si se agregan columnas nuevas, el backend puede soportarlas mientras se mantengan los headers.</li>
+      <li>Después de actualizar la extensión, recargar las páginas abiertas para que el pegado rápido funcione.</li>
+    </ul>
+  </div>
+
+  <!-- 14: Cierre -->
+  <div class="slide">
+    <h1>Shipping Sidebar</h1>
+    <p class="subtitle">Grupo Kelsoft</p>
+  </div>
+
+</div>
+
+<!-- dots -->
+<div class="dots" id="dots"></div>
+
+<!-- nav -->
+<div class="nav">
+  <button id="prevBtn">Anterior</button>
+  <span class="counter" id="counter"></span>
+  <button id="nextBtn">Siguiente</button>
+</div>
+
+<script>
+(function(){
+  const slides=document.querySelectorAll('.slide');
+  const total=slides.length;
+  let cur=0;
+
+  const dotsC=document.getElementById('dots');
+  const counter=document.getElementById('counter');
+  const prevBtn=document.getElementById('prevBtn');
+  const nextBtn=document.getElementById('nextBtn');
+
+  // build dots
+  for(let i=0;i<total;i++){
+    const d=document.createElement('button');
+    d.className='dot';
+    d.addEventListener('click',()=>go(i));
+    dotsC.appendChild(d);
+  }
+
+  function go(idx){
+    if(idx<0||idx>=total)return;
+    slides[cur].classList.remove('active');
+    dotsC.children[cur].classList.remove('active');
+    cur=idx;
+    slides[cur].classList.add('active');
+    dotsC.children[cur].classList.add('active');
+    counter.textContent=(cur+1)+' / '+total;
+    prevBtn.disabled=cur===0;
+    nextBtn.disabled=cur===total-1;
+  }
+
+  go(0);
+
+  prevBtn.addEventListener('click',()=>go(cur-1));
+  nextBtn.addEventListener('click',()=>go(cur+1));
+
+  document.addEventListener('keydown',e=>{
+    if(e.key==='ArrowRight'||e.key==='ArrowDown')go(cur+1);
+    else if(e.key==='ArrowLeft'||e.key==='ArrowUp')go(cur-1);
+  });
+})();
+</script>
+</body>
+</html>
